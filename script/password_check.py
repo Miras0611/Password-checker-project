@@ -1,8 +1,6 @@
 from browser import document, window
 
-# ---- core ----
 
-# самые популярные пароли, ну и пару наших
 COMMON = ["123456", "password", "qwerty", "admin", "12345678", "111111",
           "abc123", "iloveyou", "qwerty123", "123123", "letmein", "welcome",
           "monkey", "dragon", "parol", "1q2w3e", "zaq12wsx", "kazakhstan"]
@@ -12,7 +10,6 @@ ROWS = ["abcdefghijklmnopqrstuvwxyz", "0123456789", "qwertyuiop",
 
 
 def has_repeat(pw):
-    # 3 одинаковых подряд - aaa, 111
     for i in range(len(pw) - 2):
         if pw[i] == pw[i + 1] == pw[i + 2]:
             return True
@@ -30,7 +27,6 @@ def has_sequence(pw):
 
 
 def check_password(pw):
-    # возвращает (уровень 0-4, список подсказок)
     if pw == "":
         return 0, []
 
@@ -78,7 +74,6 @@ def check_password(pw):
     else:
         tips.append("добавь символ (!?#$ и т.д.)")
 
-    # штрафы
     if low_pw in COMMON:
         tips.append("слишком популярный пароль")
         return 1, tips
@@ -112,7 +107,6 @@ def check_password(pw):
 
     return level, tips
 
-# ---- dom ----
 
 LABELS = {0: "введите пароль", 1: "уровень 1: слабый", 2: "уровень 2: средний",
           3: "уровень 3: сильный", 4: "уровень 4: очень сильный"}
@@ -140,7 +134,6 @@ def on_input(ev):
 
 document["reg-pass"].bind("input", on_input)
 
-# отдаем уровень в js, чтобы он мог проверить пароль еще раз при сабмите
 window.pwLevel = lambda pw: check_password(pw)[0]
 
 chip = document["py-chip"]

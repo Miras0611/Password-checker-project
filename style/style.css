@@ -1,6 +1,3 @@
-/* Layout: one narrow window column, form on top, level legend underneath. */
-
-/* без этого display:flex у .card перебивает атрибут hidden */
 [hidden] { display: none !important; }
 
 :root {
