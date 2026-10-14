@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Password Gate</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="../style/style.css">
+</head>
+<body>
+<main>
+  <header>
+    <h1>password_gate</h1>
+    <span id="py-chip" class="chip">python: загрузка...</span>
+  </header>
+
+
+  <section id="view-register" class="card" aria-labelledby="reg-title">
+    <h2 id="reg-title">Регистрация</h2>
+    <form id="reg-form" autocomplete="off" novalidate>
+      <div class="field">
+        <label for="reg-login">Логин</label>
+        <input id="reg-login" type="text" maxlength="32" autocapitalize="off" spellcheck="false">
+      </div>
+      <div class="field">
+        <label for="reg-pass">Пароль</label>
+        <div class="passrow">
+          <input id="reg-pass" type="password" maxlength="64" autocomplete="new-password">
+          <button type="button" class="ghost" id="reg-toggle" aria-pressed="false">показать</button>
+        </div>
+      </div>
+      <div>
+        <div class="meter" aria-hidden="true">
+          <div class="seg" id="seg1"></div><div class="seg" id="seg2"></div>
+          <div class="seg" id="seg3"></div><div class="seg" id="seg4"></div>
+        </div>
+      </div>
+      <div class="meta" aria-live="polite">
+        <span id="level-label">Придумайте пароль</span>
+        <span id="tips"></span>
+      </div>
+      <p id="reg-msg" class="msg" aria-live="polite"></p>
+      <button class="primary" id="reg-btn" type="submit" disabled>Зарегистрироваться</button>
+    </form>
+  </section>
+
+ 
+  <section id="view-login" class="card" aria-labelledby="log-title" hidden>
+    <h2 id="log-title">Вход</h2>
+    <form id="log-form" autocomplete="off" novalidate>
+      <div class="field">
+        <label for="log-login">Логин</label>
+        <input id="log-login" type="text" maxlength="32" autocapitalize="off" spellcheck="false">
+      </div>
+      <div class="field">
+        <label for="log-pass">Пароль</label>
+        <input id="log-pass" type="password" maxlength="64" autocomplete="current-password">
+      </div>
+      <button class="primary" id="log-btn" type="submit">Войти</button>
+    </form>
+    <div id="status" aria-live="assertive"></div>
+    <p id="attempts" class="attempts"></p>
+    <p id="lock" class="lock" hidden></p>
+    <button type="button" id="logout-btn" hidden>Выйти</button>
+  </section>
+
+
+  <section class="legend" aria-label="Уровни сложности пароля">
+    <h3>Уровни сложности</h3>
+    <div class="lv"><i class="dot" style="background:var(--l1)"></i><b>1 слабый</b><span class="d">короче 8 символов или слишком простой</span></div>
+    <div class="lv"><i class="dot" style="background:var(--l2)"></i><b>2 средний</b><span class="d">8-10 символов или мало типов символов</span></div>
+    <div class="lv"><i class="dot" style="background:var(--l3)"></i><b>3 сильный</b><span class="d">не хватает длины или одного типа символов</span></div>
+    <div class="lv accepted"><i class="dot" style="background:var(--l4)"></i><b>4 очень сильный</b><span class="d">14+ символов, строчные, заглавные, цифры и символы, без повторов и последовательностей. Принимается только он.</span></div>
+  </section>
+
+  <footer>
+    <p>Данные хранятся только в localStorage этого браузера.</p>
+    <button type="button" class="ghost" id="reset-btn">reset</button>
+  </footer>
+</main>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/brython/3.12.4/brython.min.js"></script>
+<script type="text/python" src="../script/password_check.py"></script>
+<script src="../js/app.js"></script>
+</body>
+</html>
